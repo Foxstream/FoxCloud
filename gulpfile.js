@@ -140,24 +140,26 @@ gulp.task('lint', function() {
 });
 
 gulp.task('prepare-html', function() {
-    return gulp.src(["app/components/dashboard/*.html",
-            "app/components/monitoring/*.html",
-            "app/components/topbar/*.html",
-            "app/components/settings/*.html",
-            "app/components/widgets/*.html",
-            "app/components/widgets/**/*.html"
-        ])
-        .pipe(duration('Execution Time: '))
-        .pipe(gulp.dest('wwwroot/build/html/'));
+  return gulp.src([
+      "app/components/dashboard/*.html",
+      "app/components/monitoring/*.html",
+      "app/components/topbar/*.html",
+      "app/components/settings/**/*.html",
+      "app/components/widgets/*.html",
+      "app/components/widgets/**/*.html"
+    ])
+    .pipe(duration('Execution Time: '))
+    .pipe(gulp.dest('wwwroot/build/html/'));
 });
 
 gulp.task('prepare-assets', function() {
-    return gulp.src(["node_modules/ionicons/dist/fonts/ionicons*",
-            "node_modules/bootstrap/dist/fonts/glyphicons*",
-            "node_modules/font-awesome/fonts/fontawesome*"
-        ])
-        .pipe(duration('Execution Time: '))
-        .pipe(gulp.dest('wwwroot/build/fonts/'));
+  return gulp.src([
+      "node_modules/ionicons/dist/fonts/ionicons*",
+      "node_modules/bootstrap/dist/fonts/glyphicons*",
+      "node_modules/font-awesome/fonts/fontawesome*"
+    ])
+    .pipe(duration('Execution Time: '))
+    .pipe(gulp.dest('wwwroot/build/fonts/'));
 });
 
 function buildCSS(cssFiles, scssFiles, minify) {

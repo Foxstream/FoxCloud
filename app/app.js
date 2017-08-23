@@ -39,6 +39,7 @@
   // directives
   require('./components/dashboard/SideMenu');
   require('./components/topbar/TopBar');
+  require('./components/settings/inputs/UserInput');
   require('./components/settings/MemberEditor');
   require('./components/settings/SiteEditor');
   require('./components/settings/UserEditor');
@@ -78,35 +79,35 @@
 
       $stateProvider.
         state('dashboard', {
-          url: '/dashboard', 
+          url: '/dashboard',
           templateUrl: 'build/html/DashboardView.html',
           controller: 'DashboardController',
           pageName: 'Counters / Sites Overview',
           category: 'Counters'
         }).
         state('generic', {
-          url: '/generic', 
+          url: '/generic',
           templateUrl: 'build/html/GenericView.html',
           controller: 'DashboardController',
           pageName: 'Counters / Generic',
           category: 'Counters'
         }).
         state('mydashboard', {
-          url: '/mydashboard', 
+          url: '/mydashboard',
           templateUrl: 'build/html/MyDashboardView.html',
           controller: 'DashboardController',
           pageName: 'Counters / MyDashboard',
           category: 'Counters'
         }).
         state('monitoring', {
-          url: '/monitoring', 
+          url: '/monitoring',
           templateUrl: 'build/html/MonitoringView.html',
           controller: 'MonitoringController',
           pageName: 'Monitoring / Sites Overview',
           category: 'Monitoring'
         }).
         state('current_user', {
-          url: '/current_user', 
+          url: '/current_user',
           templateUrl: 'build/html/CurrentUserView.html',
           pageName: "My account",
           controller: 'CurrentUser',
@@ -120,7 +121,7 @@
           category: "Settings"
         }).
         state('settings_site_members', {
-          url: '/settings_site_members', 
+          url: '/settings_site_members',
           templateUrl: 'build/html/SettingsSiteMembersView.html',
           controller: 'SettingsSiteMembers',
           pageName: "Site Members",
@@ -130,21 +131,21 @@
           url: ':siteId'
         }).
         state('settings_users', {
-          url: '/settings_users', 
+          url: '/settings_users',
           templateUrl: 'build/html/SettingsUsersView.html',
           controller: 'SettingsUsers',
           pageName: "Users management",
           category: "Settings"
         }).
         state('settings_sites', {
-          url: '/settings_sites', 
+          url: '/settings_sites',
           templateUrl: 'build/html/SettingsSitesView.html',
           controller: 'SettingsSites',
           pageName: "Sites - Users management",
           category: "Settings"
         }).
         state('settings_per_site', {
-          url: '/settings_per_site', 
+          url: '/settings_per_site',
           templateUrl: 'build/html/SettingsPerSiteView.html',
           controller: 'SettingsPerSite',
           pageName: "Per Site management",
@@ -154,14 +155,14 @@
           url: ':siteId'
         }).
         state('settings_users_sites', {
-          url: '/settings_users_sites', 
+          url: '/settings_users_sites',
           templateUrl: 'build/html/SettingsUsersSitesView.html',
           controller: 'SettingsUsersSites',
           pageName: "Users - Sites management",
           category: "Settings"
         }).
         state('settings_per_user', {
-          url: '/settings_per_user/:userId?', 
+          url: '/settings_per_user/:userId?',
           templateUrl: 'build/html/SettingsPerUserView.html',
           controller: 'SettingsPerUser',
           pageName: "Per User management",

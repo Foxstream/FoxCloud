@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "noImplicitAny": true,
-        "sourceMap": true,
-        "allowJs": true,
-        "moduleResolution": "node",
-        "lib": [
-            "es2016",
-            "dom"
-        ],
-        "typeRoots": [
-            "node_modules/@types"
-        ]
-    },
-    "include": [
-        "./app/app.js"
+  "compilerOptions": {
+    "target": "es5",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "allowJs": true,
+    "moduleResolution": "node",
+    "lib": [
+      "es2016",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
     ]
+  },
+  "include": [
+    "./app/app.js"
+  ]
 }
