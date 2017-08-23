@@ -5,7 +5,7 @@
  */
 (function() {
 
-    require('../services/ComputeService');
+    require('../../services/ComputeService');
     
     angular.module('FSCounterAggregatorApp').
 	controller('KPIMax', [

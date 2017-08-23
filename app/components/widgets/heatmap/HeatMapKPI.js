@@ -6,7 +6,7 @@
 
 import { TextureLoader } from 'three';
 
-require('../../services/WidgetStyleService');
+require('../../../services/WidgetStyleService');
 
 import { HeatMapRenderer } from './HeatMapRenderer';
 

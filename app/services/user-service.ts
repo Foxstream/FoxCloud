@@ -1,12 +1,12 @@
 import {IAngularStatic, IHttpPromiseCallbackArg, IHttpService, IPromise, IQService} from "angular";
 import {LoDashStatic} from "lodash";
-import {LegacyCurrentUser} from "../../legacy-types/objects/legacy-current-user";
-import {LegacyUser} from "../../legacy-types/objects/legacy-user";
-import {LegacyVisibleSite} from "../../legacy-types/objects/legacy-visible-site";
-import {UserJson} from "../../types/object/user";
-import {DataNodeId} from "../../types/scalars/data-node-id";
-import {SelfJson} from "../../types/unions/self";
 import {Myconfig} from "../configuration/myconfig";
+import {LegacyCurrentUser} from "../legacy-types/objects/legacy-current-user";
+import {LegacyUser} from "../legacy-types/objects/legacy-user";
+import {LegacyVisibleSite} from "../legacy-types/objects/legacy-visible-site";
+import {UserJson} from "../types/object/user";
+import {DataNodeId} from "../types/scalars/data-node-id";
+import {SelfJson} from "../types/unions/self";
 
 declare const angular: IAngularStatic;
 declare const _: LoDashStatic;

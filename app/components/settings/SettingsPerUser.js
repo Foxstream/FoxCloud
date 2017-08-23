@@ -6,9 +6,9 @@
  */
 (function() {
 
-    require('../services/UserService');
-    require('../services/SiteService');
-    
+    require('../../services/user-service');
+    require('../../services/site-service');
+
     angular.module('FSCounterAggregatorApp')
 	.controller('SettingsPerUser', [
 	    '$scope',
@@ -38,9 +38,9 @@
 		$scope.selectedElts = {};
 		$scope.selectedElt = undefined;
 		$scope.user = undefined;
-		
+
 		$scope.dtOptions = DTOptionsBuilder.newOptions();
-		
+
 		$scope.dtColumnDefs = [
 		    DTColumnDefBuilder.newColumnDef(0).notSortable(),
 		    DTColumnDefBuilder.newColumnDef(1),
@@ -76,7 +76,7 @@
 
 		$scope.deleteUser = function(user) {
 		};
-		
+
 		function haveUser(userArray, user, key) {
 		    for(var i = 0; i < userArray.length; ++i) {
 			if(userArray[i] == user[key]) {
@@ -85,7 +85,7 @@
 		    }
 		    return false;
 		}
-		
+
 		$scope.update = function() {
 		    $scope.userSites = {};
 		    $scope.selectedElts = {};
@@ -102,7 +102,7 @@
 			}
 		    }
 		};
-		
+
 		function initScope() {
 		    $q.all([ SiteResources.query().$promise,
 			     UserResources.query().$promise ])
@@ -119,14 +119,14 @@
 					if($scope.users[i]._id === $stateParams.userId) {
 					    $scope.selectedElt = $scope.users[i];
 					    break;
-					}				    
-				    }				    
+					}
+				    }
 				}
 				$scope.update();
-			    }			    
+			    }
 			});
 		}
-		
+
 		initScope();
 
 	    }]);

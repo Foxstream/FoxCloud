@@ -6,7 +6,7 @@
  */
 (function () {
 
-  require('../services/SiteService');
+  require('../../services/site-service');
 
   angular.module('FSCounterAggregatorApp').controller('SettingsPerSite', [
     '$scope',

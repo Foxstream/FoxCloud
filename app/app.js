@@ -8,7 +8,7 @@
   //require('angular');
   require('angular-ui-codemirror');
   require('./components/modules/ngReallyClickModule');
-  require('./components/services/LayoutService');
+  require('./services/LayoutService');
 
   angular.module('FSCounterAggregatorApp', [
     'ui.router',
@@ -39,7 +39,6 @@
   // directives
   require('./components/dashboard/SideMenu');
   require('./components/topbar/TopBar');
-  require('./components/settings/inputs/UserInput');
   require('./components/settings/MemberEditor');
   require('./components/settings/SiteEditor');
   require('./components/settings/UserEditor');

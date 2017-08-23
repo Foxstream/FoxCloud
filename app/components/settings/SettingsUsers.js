@@ -5,7 +5,7 @@
  * require administrator rights
  */
 (function () {
-  require('../services/UserService');
+  require('../../services/user-service');
 
   angular.module('FSCounterAggregatorApp').controller('SettingsUsers', [
     '$scope',

@@ -3,7 +3,7 @@
  * @memberOf FSCounterAggregatorApp
  * @description Manage the user defined dashboard
  */
-require('../services/UserService');
+require('../../services/user-service');
 
 angular.module('FSCounterAggregatorApp')
     .directive(

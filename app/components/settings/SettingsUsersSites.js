@@ -6,8 +6,8 @@
  */
 (function() {
 
-    require('../services/UserService');
-    require('../services/SiteService');
+    require('../../services/user-service');
+    require('../../services/site-service');
     
     angular.module('FSCounterAggregatorApp')
 	.controller('SettingsUsersSites', [

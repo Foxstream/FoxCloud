@@ -1,11 +1,11 @@
 import {IAngularStatic, IHttpPromiseCallbackArg, IHttpService, IPromise, IQService} from "angular";
-import {CompoundNodeJson} from "../../types/object/compound-node";
-import {LegacySite} from "../../legacy-types/objects/legacy-site";
 import {Myconfig} from "../configuration/myconfig";
-import {EmailAddress} from "../../types/scalars/email-address";
-import {LegacyItem} from "../../legacy-types/objects/legacy-item";
-import {DataNodeJson} from "../../types/unions/data-node";
-import {DataNodeId} from "../../types/scalars/data-node-id";
+import {LegacyItem} from "../legacy-types/objects/legacy-item";
+import {LegacySite} from "../legacy-types/objects/legacy-site";
+import {CompoundNodeJson} from "../types/object/compound-node";
+import {DataNodeId} from "../types/scalars/data-node-id";
+import {EmailAddress} from "../types/scalars/email-address";
+import {DataNodeJson} from "../types/unions/data-node";
 
 declare const angular: IAngularStatic;
 
@@ -14,7 +14,7 @@ export interface SiteService {
 
   getItem(siteId: DataNodeId, itemId: DataNodeId): IPromise<LegacyItem>;
 
-  getItems(siteId: DataNodeId, items: Iterable<DataNodeId>): IPromise<LegacyItem[]>;
+  getItems(siteId: DataNodeId, items: DataNodeId[]): IPromise<LegacyItem[]>;
 
   addUser (siteId: DataNodeId, userEmail: EmailAddress, addAsAdmin: boolean): any;
 

@@ -56,8 +56,8 @@ const localJSSources = [];
 
 const browserEntries = [
     './app/app.js',
-    argv.local ? "./app/components/configuration/conf_debug.js" :
-    "./app/components/configuration/conf.js"
+    argv.local ? "./app/configuration/conf_debug.js" :
+    "./app/configuration/conf.js"
 ];
 
 const lintSources = browserEntries.concat([

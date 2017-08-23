@@ -7,10 +7,10 @@
 (function () {
 
 	require('./DataService');
-	require('./UserService');
-	require('./SiteService');
+	require('./user-service');
+	require('./site-service');
 	require('./ComputeService');
-	require('../indicators/OccupancyIndicator');
+	require('../components/indicators/OccupancyIndicator');
 
 	angular.module('FSCounterAggregatorApp').
 		service('DashboardParamsService',
@@ -61,7 +61,7 @@
 
 							let sites = [];
 
-							if (myconfig.debug) {								
+							if (myconfig.debug) {
 								that.sites = data.sites.map((site) => {
 									return {
 										id: site._id,

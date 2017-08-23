@@ -4,7 +4,7 @@
 * @description Compute the sum of data for each range within a period of time
 */
 
-require('../services/ComputeService');
+require('../../services/ComputeService');
 
 function KPIPeriodGeneric(ComputeService) {
 

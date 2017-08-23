@@ -4,7 +4,7 @@
 * @description Widget implementation for displaying statistics in a tabular format
 **/
 
-require('../services/WidgetStyleService');
+require('../../services/WidgetStyleService');
 
 angular.module('FSCounterAggregatorApp').directive('fcaTableKpi', function() {
     return {

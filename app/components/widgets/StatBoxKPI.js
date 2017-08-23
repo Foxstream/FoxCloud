@@ -4,7 +4,7 @@
  * @description Widget implementation for displaying a KPI value from a specific indicator
  **/
 
-require('../services/WidgetStyleService');
+require('../../services/WidgetStyleService');
 
 angular.module('FSCounterAggregatorApp').
     directive('fcaStatBoxKpi', function(){
