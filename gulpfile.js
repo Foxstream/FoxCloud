@@ -1,31 +1,31 @@
-var fs = require('fs');
-var gulp = require('gulp');
-var gulpSequence = require('gulp-sequence');
-var concat_css = require('gulp-concat-css');
-var concat_js = require('gulp-concat');
-var minify_css = require('gulp-cssnano');
-var less = require('gulp-less');
-var jshint = require('gulp-jshint');
-var git = require('gulp-git');
-var LessPluginCleanCSS = require('less-plugin-clean-css');
-var minify_js = require("gulp-uglify");
-var duration = require('gulp-duration');
-var mkdirp = require('mkdirp');
-var jsdoc = require('gulp-jsdoc');
-var adminlteRoot = 'node_modules/admin-lte/';
-var cleancss = new LessPluginCleanCSS({ advanced: true });
-var sass = require('gulp-sass');
-var rename = require('gulp-rename');
-var filesExist = require('files-exist');
+const fs = require('fs');
+const gulp = require('gulp');
+const gulpSequence = require('gulp-sequence');
+const concat_css = require('gulp-concat-css');
+const concat_js = require('gulp-concat');
+const minify_css = require('gulp-cssnano');
+const less = require('gulp-less');
+const jshint = require('gulp-jshint');
+const git = require('gulp-git');
+const LessPluginCleanCSS = require('less-plugin-clean-css');
+const minify_js = require("gulp-uglify");
+const duration = require('gulp-duration');
+const mkdirp = require('mkdirp');
+const jsdoc = require('gulp-jsdoc');
+const adminlteRoot = 'node_modules/admin-lte/';
+const cleancss = new LessPluginCleanCSS({ advanced: true });
+const sass = require('gulp-sass');
+const rename = require('gulp-rename');
+const filesExist = require('files-exist');
 //
-var browserify = require('browserify');
-var sourcemaps = require('gulp-sourcemaps');
-var source = require('vinyl-source-stream');
-var buffer = require('vinyl-buffer');
-var collapse = require('bundle-collapser/plugin');
-var tsify = require('tsify');
+const browserify = require('browserify');
+const sourcemaps = require('gulp-sourcemaps');
+const source = require('vinyl-source-stream');
+const buffer = require('vinyl-buffer');
+const collapse = require('bundle-collapser/plugin');
+const tsify = require('tsify');
 
-var usageCmd = '\nUsage: gulp build|release|docs|install [--local] [--dest]\n \
+const usageCmd = '\nUsage: gulp build|release|docs|install [--local] [--dest]\n \
 \t--local\tUse fake data instead of retrieving them from the server.\n \
 \t--dest\tSet the destination folder for the install task.\n\
 \tbuild\tSimply build the project.\n\
@@ -34,11 +34,11 @@ var usageCmd = '\nUsage: gulp build|release|docs|install [--local] [--dest]\n \
 \tinstall\tBuild the project and then copy all the files to the folder specified with --dest.\n\
 ';
 
-var argv = require('yargs')
+const argv = require('yargs')
     .usage(usageCmd)
     .argv;
 
-var cssSources = ["node_modules/ionicons/dist/css/ionicons.css",
+const cssSources = ["node_modules/ionicons/dist/css/ionicons.css",
     "node_modules/font-awesome/css/font-awesome.css",
     "node_modules/codemirror/lib/codemirror.css",
     "node_modules/codemirror/addon/lint/lint.css",
@@ -50,21 +50,21 @@ var cssSources = ["node_modules/ionicons/dist/css/ionicons.css",
     "lib/Styles/*.css"
 ];
 
-var scssSources = ["app/assets/scss/src/**/*.scss"];
+const scssSources = ["app/assets/scss/src/**/*.scss"];
 
-var localJSSources = [];
+const localJSSources = [];
 
-var browserEntries = [
+const browserEntries = [
     './app/app.js',
     argv.local ? "./app/components/configuration/conf_debug.js" :
     "./app/components/configuration/conf.js"
 ];
 
-var lintSources = browserEntries.concat([
+const lintSources = browserEntries.concat([
     'app/components/**/*.js'
 ]);
 
-var externalJSSources = ['node_modules/moment/moment.js',
+const externalJSSources = ['node_modules/moment/moment.js',
     'node_modules/moment-timezone/builds/moment-timezone-with-data.js',
     'node_modules/lodash/lodash.js',
     'node_modules/jquery/dist/jquery.js',
@@ -101,7 +101,7 @@ var externalJSSources = ['node_modules/moment/moment.js',
     //'node_modules/angular-ui-codemirror/src/ui-codemirror.js'
 ];
 
-var jsSources = externalJSSources.concat(localJSSources);
+const jsSources = externalJSSources.concat(localJSSources);
 
 mkdirp('docs');
 mkdirp('wwwroot/build/fonts');
