@@ -1,5 +1,5 @@
 {
-  "name": "@foxstream/foxcloud-client",
+  "name": "@foxstream/foxcloud-app",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/index.js",
