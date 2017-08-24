@@ -24,7 +24,13 @@
     'angularScreenfull'
   ]);
 
-  // controllers
+  // Services
+  require('./services/authentication-service');
+  require('./services/legacy-user-service');
+  require('./services/site-service');
+  require('./services/user-service');
+
+  // Controllers
   require('./components/dashboard/DashboardController');
   require('./components/monitoring/MonitoringController');
   require('./components/settings/CurrentUser');
@@ -36,7 +42,7 @@
   require('./components/settings/SettingsUsersSites');
   require('./components/settings/SettingsPerUser');
 
-  // directives
+  // Directives
   require('./components/dashboard/SideMenu');
   require('./components/topbar/TopBar');
   require('./components/settings/MemberEditor');
@@ -65,7 +71,7 @@
     .controller('KPISitesPeriod', require('./components/kpis/KPISitesPeriod'))
     .controller('KPITypicalDay', require('./components/kpis/KPITypicalDay'));
 
-  // filters
+  // Filters
   require('./components/pipes/HourFormatPipe');
   require('./components/pipes/SiteNamePipe');
 

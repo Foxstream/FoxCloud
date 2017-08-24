@@ -7,4 +7,9 @@ export interface Myconfig {
    * TODO: Use `process.env.NODE_ENV !== "production"` and webpack define instead, to allow for dead-code elimination.
    */
   debug: boolean;
+
+  /**
+   * Base URI of the API.
+   */
+  apiUri: string;
 }

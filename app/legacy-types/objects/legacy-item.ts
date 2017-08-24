@@ -14,10 +14,19 @@ export interface LegacyItem {
   _id: DataNodeId;
   mac: string | null;
   name: DisplayName;
+
   /**
-   * Looks like a UUID
+   * UUID
    */
   pairId: string;
-  lastUpdateTime: IsoDate;
-  itemid: string;
+
+  /**
+   * Date of the last update, `null` if never updated.
+   */
+  lastUpdateTime: IsoDate | null;
+
+  /**
+   * A key identifying this item, `null` if never set.
+   */
+  itemid: string | null;
 }

@@ -1,16 +1,19 @@
+import {DataNodeType, DataNodeTypeJson} from "../enums/data-node-type";
 import {DataNodeId} from "../scalars/data-node-id";
-import {Json} from "../scalars/json";
+import {JsonValue} from "../scalars/json-value";
 
 export interface DataNodeBase {
+  type: DataNodeType;
   id: DataNodeId;
   displayName: string;
-  appData: Json;
+  appData: JsonValue;
   // TODO
 }
 
 export interface DataNodeBaseJson {
+  type: DataNodeTypeJson;
   id: DataNodeId;
   display_name: string;
-  app_data: Json;
+  app_data: JsonValue;
   // TODO
 }

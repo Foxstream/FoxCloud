@@ -5,22 +5,20 @@
  * require administrator rights
  */
 (function () {
-  require('../../services/user-service');
-
   angular.module('FSCounterAggregatorApp').controller('SettingsUsers', [
     '$scope',
     '$compile',
-    'UserService',
+    'LegacyUserService',
     'DTOptionsBuilder',
     'DTColumnDefBuilder',
     function (
       $scope,
       $compile,
-      UserService,
+      LegacyUserService,
       DTOptionsBuilder,
       DTColumnDefBuilder
     ) {
-      var UserResources = UserService.getResource();
+      var UserResources = LegacyUserService.getResource();
 
       $scope.selectAll = false;
       $scope.selectedLength = 0;
@@ -118,14 +116,12 @@
 
       function initScope() {
         $scope.users = UserResources.query(function () {
-
           for (var i = 0; i < $scope.users.length; ++i) {
             $scope.selectedElts[$scope.users[i]._id] = {
               'selected': false,
               'user': $scope.users[i]
             };
           }
-
         });
       }
 
@@ -140,6 +136,5 @@
       }
 
       initScope();
-
     }]);
 })();

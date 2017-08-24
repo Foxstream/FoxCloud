@@ -1,6 +1,6 @@
 import {LegacySite} from "./legacy-site";
 import {DataNodeId} from "../../types/scalars/data-node-id";
-import {Json} from "../../types/scalars/json";
+import {JsonValue} from "../../types/scalars/json-value";
 import {SiteInfo} from "./site-info";
 
 /**
@@ -9,6 +9,6 @@ import {SiteInfo} from "./site-info";
 export interface LegacyVisibleSite  {
   _id: DataNodeId;
   items: any[];
-  siteInfo: Json & SiteInfo;
+  siteInfo: JsonValue & SiteInfo;
   isadmin: boolean;
 }

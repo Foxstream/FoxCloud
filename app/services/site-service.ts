@@ -183,7 +183,7 @@ export interface SiteService {
       };
 
       /**
-       * TODO: Check what it does.
+       * Set `items[i].itemid` to `null and generate a new `pairid` value for the item `items[i]._id === itemid`.
        */
       this.unlinkItem = function (siteId, itemId) {
         if (myconfig.debug) {
