@@ -107,7 +107,7 @@ export interface LegacyUserResource {
     "$resource",
     "$q",
     "myconfig",
-    "UserService",
+    "userService",
     "AuthenticationService",
     function (
       this: LegacyUserService,

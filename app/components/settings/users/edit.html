@@ -1,0 +1,62 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="row" ng-show="true">
+      <section class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div>Edit user settings</div>
+          </div>
+          <div class="panel-body">
+            <form name="userForm" novalidate>
+              <div class="form-group">
+                <label>Display name:</label>
+                <input class="form-control" ng-model="$ctrl.displayName" type="text" name="display_name" required/>
+              </div>
+              <div class="form-group">
+                <label>Email:</label>
+                <input class="form-control" ng-model="$ctrl.user.email" type="email" disabled readonly/>
+              </div>
+              <!--
+              <div class="form-group">
+                <div class="alert alert-warning" ng-show="currentUser.resetPasswordLink !== undefined">
+                  <p>You have requested a password reset. Please, click on the following link to confirm this
+                    action.</p>
+                  <a href="{{currentUser.resetPasswordLink}}">Click here to reset password</a>
+                </div>
+                <button class='btn btn-default'
+                        ng-show="!isNew && currentUser.resetPasswordLink === undefined"
+                        ng-click="resetPassword()">
+                  <i class="fa fa-recycle"> Request Password Reset</i></button>
+              </div>
+              -->
+              <div class="form-group">
+                <label>Enabled:</label>
+                <input type="checkbox" ng-model="$ctrl.user.isEnabled" disabled readonly/>
+              </div>
+              <div class="form-group">
+                <label>Global Administrator:</label>
+                <input type="checkbox" ng-model="$ctrl.user.isGlobalAdministrator" disabled readonly/>
+              </div>
+
+              <div class="form-group">
+                <label>User additional properties:</label>
+                <fca-settings-form-controls-json ng-model="$ctrl.appData"></fca-settings-form-controls-json>
+              </div>
+
+              <button class='btn btn-primary' ng-disabled="!$ctrl.isDirty() || !userForm.$valid"
+                      ng-click="$ctrl.handleSave()">
+                Save changes
+              </button>
+              <button ng-show="!$ctrl.isDirty()" class='btn btn-default' ng-click="$ctrl.handleCancel()">Cancel</button>
+              <button ng-show="$ctrl.isDirty()"
+                      class="btn btn-warning"
+                      ng-really-click="$ctrl.handleCancel()"
+                      ng-really-message="Do you really want to cancel your changes ?">Cancel
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div> <!-- end row -->
+  </section>
+</div>

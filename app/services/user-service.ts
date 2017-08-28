@@ -1,4 +1,4 @@
-import {IAngularStatic, IHttpPromiseCallbackArg, IHttpService, IPromise,} from "angular";
+import {IAngularStatic, IHttpResponse, IHttpService, IPromise} from "angular";
 import * as urlJoin from "url-join";
 import {Myconfig} from "../configuration/myconfig";
 import {User, userFromJson, UserJson} from "../types/object/user";
@@ -8,16 +8,115 @@ import {UserId} from "../types/scalars/user-id";
 
 declare const angular: IAngularStatic;
 
-export interface UserService {
-  createUser(options: CreateUserOptions): IPromise<User>;
+/**
+ * @class UserService
+ * @memberOf FSCounterAggregatorApp
+ * @description Manage users
+ */
+export class UserService {
+  private $http: IHttpService;
+  private myConfig: Myconfig;
 
-  updateUser(userId: UserId, patch: UpdateUserPatch): IPromise<User>;
+  constructor($http: IHttpService, myConfig: Myconfig) {
+    this.$http = $http;
+    this.myConfig = myConfig;
+  }
 
-  setPassword(userId: UserId, options: SetPasswordOptions): IPromise<User>;
+  /**
+   * Creates a new user.
+   *
+   * @function createUser
+   * @memberOf FSCounterAggregatorApp.UserService
+   */
+  createUser(options: CreateUserOptions): IPromise<User> {
+    console.log("creating");
+    const url: string = urlJoin(this.myConfig.apiUri, "users");
+    const data: any = {
+      email: options.email,
+      display_name: options.displayName,
+      is_global_administrator: options.isGlobalAdministrator,
+      app_data: options.appData,
+    };
+    return this.$http.post(url, data)
+      .then<User>((ret: IHttpResponse<UserJson>): User => userFromJson(ret.data));
+  }
 
-  getUserById(userId: UserId): IPromise<User>;
+  /**
+   * Updates the user.
+   *
+   * @function updateUser
+   * @memberOf FSCounterAggregatorApp.UserService
+   * @param userId ID of the user to update.
+   * @param patch Document describing the updates to apply.
+   */
+  updateUser(userId: UserId, patch: UpdateUserPatch): IPromise<User> {
+    const url: string = urlJoin(this.myConfig.apiUri, `users/${userId}`);
+    const data: any = {
+      display_name: patch.displayName,
+      app_data: patch.appData,
+    };
+    return this.$http.patch(url, data)
+      .then<User>((ret: IHttpResponse<UserJson>): User => userFromJson(ret.data));
+  }
 
-  getUsers(): IPromise<User[]>;
+  deleteUser(userId: UserId): IPromise<void>;
+
+  /**
+   * Delete the user.
+   *
+   * @function deleteUser
+   * @memberOf FSCounterAggregatorApp.UserService
+   * @param userId ID of the user to delete.
+   */
+  deleteUser(userId: UserId): IPromise<void> {
+    const url: string = urlJoin(this.myConfig.apiUri, `users/${userId}`);
+    return this.$http.delete(url)
+      .then<void>((ret: IHttpResponse<any>): void => {
+        // TODO: Check for error, assert that the server response is as expected.
+        return;
+      });
+  }
+
+  /**
+   * Update the password of the supplied user.
+   *
+   * @function setPassword
+   * @memberOf FSCounterAggregatorApp.UserService
+   */
+  setPassword(userId: UserId, options: SetPasswordOptions): IPromise<User> {
+    const url: string = urlJoin(this.myConfig.apiUri, `users/${userId}`);
+    const data: any = {
+      old_password: options.oldPassword,
+      password: options.password,
+    };
+    console.warn("Old password is not checked when updating the user");
+    return this.$http.patch(url, data)
+      .then<User>((ret: IHttpResponse<UserJson>): User => userFromJson(ret.data));
+  }
+
+  /**
+   * Get the user corresponding to the provided ID.
+   *
+   * @function getUserById
+   * @memberOf FSCounterAggregatorApp.UserService
+   */
+  getUserById(userId: UserId): IPromise<User> {
+    const url: string = urlJoin(this.myConfig.apiUri, `users/${userId}`);
+    return this.$http.get(url)
+      .then<User>((ret: IHttpResponse<UserJson>): User => userFromJson(ret.data));
+  };
+
+  /**
+   * Get all the users.
+   *
+   * @function getUsers
+   * @memberOf FSCounterAggregatorApp.UserService
+   */
+  getUsers(): IPromise<User[]> {
+    const url: string = urlJoin(this.myConfig.apiUri, "users");
+    return this.$http.get(url)
+      .then<User[]>((ret: IHttpResponse<UserJson[]>): User[] => ret.data.map(userFromJson));
+  }
 }
 
 /**
@@ -55,95 +154,4 @@ export interface SetPasswordOptions {
   password: string;
 }
 
-/**
- * @class UserService
- * @memberOf FSCounterAggregatorApp
- * @description Manage users
- */
-(function () {
-  angular.module("FSCounterAggregatorApp").service("UserService", [
-    "$http",
-    "myconfig",
-    function (
-      this: UserService,
-      $http: IHttpService,
-      myconfig: Myconfig,
-    ) {
-      /**
-       * Creates a new user.
-       *
-       * @function createUser
-       * @memberOf FSCounterAggregatorApp.UserService
-       */
-      this.createUser = function (options: CreateUserOptions): IPromise<User> {
-        const url: string = urlJoin(myconfig.apiUri, "users");
-        const data: any = {
-          email: options.email,
-          display_name: options.displayName,
-          is_global_administrator: options.isGlobalAdministrator,
-          app_data: options.appData,
-        };
-        return $http.post(url, data)
-          .then<User>((ret: IHttpPromiseCallbackArg<UserJson>): User => userFromJson(ret.data));
-      };
-
-      /**
-       * Updates the user.
-       *
-       * @function setSettings
-       * @memberOf FSCounterAggregatorApp.UserService
-       * @param userId ID of the user to update.
-       * @param patch Document describing the updates to apply.
-       */
-      this.updateUser = function (userId: UserId, patch: UpdateUserPatch): IPromise<User> {
-        const url: string = urlJoin(myconfig.apiUri, `users/${userId}`);
-        const data: any = {
-          display_name: patch.displayName,
-          app_data: patch.appData,
-        };
-        return $http.patch(url, data)
-          .then<User>((ret: IHttpPromiseCallbackArg<UserJson>): User => userFromJson(ret.data));
-      };
-
-      /**
-       * Update the password of the supplied user.
-       *
-       * @function setPassword
-       * @memberOf FSCounterAggregatorApp.UserService
-       */
-      this.setPassword = function (userId: UserId, options: SetPasswordOptions): IPromise<User> {
-        const url: string = urlJoin(myconfig.apiUri, `users/${userId}`);
-        const data: any = {
-          old_password: options.oldPassword,
-          password: options.password,
-        };
-        console.warn("Old password is not checked when updating the user");
-        return $http.patch(url, data)
-          .then<User>((ret: IHttpPromiseCallbackArg<UserJson>): User => userFromJson(ret.data));
-      };
-
-      /**
-       * Get the user corresponding to the provided ID.
-       *
-       * @function getUserById
-       * @memberOf FSCounterAggregatorApp.UserService
-       */
-      this.getUserById = function (userId: UserId): IPromise<User> {
-        const url: string = urlJoin(myconfig.apiUri, `users/${userId}`);
-        return $http.get(url)
-          .then<User>((ret: IHttpPromiseCallbackArg<UserJson>): User => userFromJson(ret.data));
-      };
-
-      /**
-       * Get all the users.
-       *
-       * @function getUsers
-       * @memberOf FSCounterAggregatorApp.UserService
-       */
-      this.getUsers = function (): IPromise<User[]> {
-        const url: string = urlJoin(myconfig.apiUri, "users");
-        return $http.get(url)
-          .then<User[]>((ret: IHttpPromiseCallbackArg<UserJson[]>): User[] => ret.data.map(userFromJson));
-      };
-    }]);
-}());
+angular.module("FSCounterAggregatorApp").service("userService", ["$http", "myconfig", UserService]);

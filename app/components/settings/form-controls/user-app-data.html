@@ -1,0 +1,10 @@
+<uib-tabset>
+  <uib-tab index="0" heading="General" select="handleGeneralSelection()">
+    <ui-codemirror ui-codemirror-opts="generalEditorOptions" ui-refresh="forceRefresh"
+                   ng-model="data.general"></ui-codemirror>
+  </uib-tab>
+  <uib-tab index="1" heading="Dashboard" select="handleDashboardSelection()">
+    <ui-codemirror ui-codemirror-opts="dashboardEditorOptions" ui-refresh="forceRefresh"
+                   ng-model="data.dashboard"></ui-codemirror>
+  </uib-tab>
+</uib-tabset>
