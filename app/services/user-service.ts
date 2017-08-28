@@ -1,10 +1,10 @@
-import {IAngularStatic, IHttpResponse, IHttpService, IPromise} from "angular";
+import { IAngularStatic, IHttpResponse, IHttpService, IPromise } from "angular";
 import * as urlJoin from "url-join";
-import {Myconfig} from "../configuration/myconfig";
-import {User, userFromJson, UserJson} from "../types/object/user";
-import {DisplayName} from "../types/scalars/display-name";
-import {EmailAddress} from "../types/scalars/email-address";
-import {UserId} from "../types/scalars/user-id";
+import { Myconfig } from "../configuration/myconfig";
+import { User, userFromJson, UserJson } from "../types/object/user";
+import { DisplayName } from "../types/scalars/display-name";
+import { EmailAddress } from "../types/scalars/email-address";
+import { UserId } from "../types/scalars/user-id";
 
 declare const angular: IAngularStatic;
 
