@@ -1,52 +1,53 @@
 import { IAngularStatic } from "angular";
 import { IStateService } from "angular-ui-router";
-import { UpdateUserPatch, USER_SERVICE_TOKEN, UserService } from "../../../services/user-service";
-import { User } from "../../../types/object/user";
+import { DATA_NODE_SERVICE_TOKEN, DataNodeService } from "../../../services/data-node-service";
+import { UpdateUserPatch } from "../../../services/user-service";
 import { JsonValue } from "../../../types/scalars/json-value";
-import { DisplayName } from "../../../types/scalars/display-name";
+import { CompoundNode } from "../../../types/object/compound-node";
+import { DataNode } from "../../../types/unions/data-node";
 
 declare const angular: IAngularStatic;
 
 /**
- * Token used for Angular's dependency injection of the settings/users/edit component.
+ * Token used for Angular's dependency injection of the settings/sites/edit component.
  * This corresponds to the "Angular name" for this component.
  */
-export const SETTINGS_USERS_EDIT_TOKEN: string = "fcaSettingsUsersEdit";
+export const SETTINGS_SITES_EDIT_TOKEN: string = "fcaSettingsSitesEdit";
 
-angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_EDIT_TOKEN, {
-  templateUrl: "build/html/users/edit.html",
+angular.module("FSCounterAggregatorApp").component(SETTINGS_SITES_EDIT_TOKEN, {
+  templateUrl: "build/html/sites/edit.html",
   bindings: {
-    user: "<",
+    site: "<",
   },
   controller: [
     "$state",
-    USER_SERVICE_TOKEN,
+    DATA_NODE_SERVICE_TOKEN,
     class {
       /**
-       * The user being edited.
+       * The site being edited.
        * Provided by the parent component through attribute bindings.
        * It available once `$onInit` is called.
        */
-      user?: User;
+      site?: CompoundNode;
 
-      displayName: DisplayName;
+      displayName: string;
 
       appData: JsonValue;
 
       private $state: IStateService;
-      private userService: UserService;
+      private dataNodeService: DataNodeService;
 
-      constructor($state: IStateService, userService: UserService) {
+      constructor($state: IStateService, dataNodeService: DataNodeService) {
         this.$state = $state;
-        this.userService = userService;
+        this.dataNodeService = dataNodeService;
 
         this.displayName = "";
         this.appData = {};
       }
 
       $onInit() {
-        this.displayName = this.user.displayName;
-        this.appData = this.user.appData;
+        this.displayName = this.site.displayName;
+        this.appData = this.site.appData;
       }
 
       /**
@@ -60,18 +61,18 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_EDIT_TOKEN, {
 
       handleSave(): void {
         const patch: UpdateUserPatch = this.getPatch();
-        this.userService.updateUser(this.user!.id, patch)
-          .then((user: User): void => {
-            this.$state.go("settings_users");
+        this.dataNodeService.updateDataNode(this.site!.id, patch)
+          .then((dataNode: DataNode): void => {
+            this.$state.go("settings_sites");
           })
           .catch((err: Error): void => {
-            alert("An error occured during the update of the user, see console for report");
+            alert("An error occured during the update of the site, see console for report");
             console.error(err);
           });
       }
 
       handleCancel(): void {
-        this.$state.go("settings_users");
+        this.$state.go("settings_sites");
       }
 
       /**
@@ -80,14 +81,14 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_EDIT_TOKEN, {
        * @return Update patch with the changes from the form.
        */
       private getPatch(): UpdateUserPatch {
-        if (this.user === undefined) {
-          throw new Error("Cannot create patch: `user` is not initialized yet.");
+        if (this.site === undefined) {
+          throw new Error("Cannot create patch: `site` is not initialized yet.");
         }
         const patch: UpdateUserPatch = {};
-        if (this.displayName !== this.user.displayName) {
+        if (this.displayName !== this.site.displayName) {
           patch.displayName = this.displayName;
         }
-        if (!angular.equals(this.appData, this.user.appData)) {
+        if (!angular.equals(this.appData, this.site.appData)) {
           patch.appData = JSON.parse(angular.toJson(this.appData));
         }
         return patch;

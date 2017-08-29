@@ -82,8 +82,6 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_SITES_TOKEN, {
           DTColumnDefBuilder.newColumnDef(5).notSortable(),
         ];
 
-        console.log("Test");
-
         this.siteList = toResolvableArray(dataNodeService.getViewableCompoundNodes()
           .then((compoundNodes: CompoundNode[]): ListItem[] => {
             const result: ListItem[] = [];

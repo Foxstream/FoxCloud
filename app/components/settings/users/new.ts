@@ -1,18 +1,26 @@
-import {IAngularStatic} from "angular";
-import {IStateService} from "angular-ui-router";
-import {UserService} from "../../../services/user-service";
-import {User} from "../../../types/object/user";
+import { IAngularStatic } from "angular";
+import { IStateService } from "angular-ui-router";
+import { USER_SERVICE_TOKEN, UserService } from "../../../services/user-service";
+import { User } from "../../../types/object/user";
+import { DisplayName } from "../../../types/scalars/display-name";
+import { EmailAddress } from "../../../types/scalars/email-address";
 
 declare const angular: IAngularStatic;
 
-angular.module("FSCounterAggregatorApp").component("fcaSettingsUsersNew", {
+/**
+ * Token used for Angular's dependency injection of the settings/users/new component.
+ * This corresponds to the "Angular name" for this component.
+ */
+export const SETTINGS_USERS_NEW_TOKEN: string = "fcaSettingsUsersNew";
+
+angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_NEW_TOKEN, {
   templateUrl: "build/html/users/new.html",
   controller: [
     "$state",
-    "userService",
+    USER_SERVICE_TOKEN,
     class {
-      displayName: string;
-      email: string;
+      displayName: DisplayName;
+      email: EmailAddress;
       isGlobalAdministrator: boolean;
 
       private $state: IStateService;

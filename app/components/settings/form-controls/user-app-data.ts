@@ -3,6 +3,12 @@ import { Editor } from "codemirror";
 
 declare const angular: IAngularStatic;
 
+/**
+ * Token used for Angular's dependency injection of the settings/form-controls/user-app-data component.
+ * This corresponds to the "Angular name" for this component.
+ */
+export const SETTINGS_FORM_CONTROLS_USER_APP_DATA: string = "fcaSettingsFormControlsUserAppData";
+
 interface UserAppDataScope {
   data: {
     general: string;
@@ -25,7 +31,7 @@ interface UserAppDataScope {
 const DEFAULT_DASHBOARD: string = "";
 const DEFAULT_GENERAL: string = angular.toJson({dashboard: DEFAULT_DASHBOARD}, true);
 
-angular.module("FSCounterAggregatorApp").directive("fcaSettingsFormControlsJson",
+angular.module("FSCounterAggregatorApp").directive(SETTINGS_FORM_CONTROLS_USER_APP_DATA,
   (): IDirective => {
     return {
       restrict: "E",
@@ -103,12 +109,10 @@ angular.module("FSCounterAggregatorApp").directive("fcaSettingsFormControlsJson"
 
         // Binding from ngModel to view
         ngModel.$render = () => {
-          const appData: any = ngModel.$viewValue;
-          scope.data.general = angular.toJson(appData, true);
-          scope.data.dashboard = appData.general.dashboard !== undefined ?
-            String(appData.general.dashboard) :
+          scope.data.general = angular.toJson(ngModel.$viewValue, true);
+          scope.data.dashboard = ngModel.$viewValue.dashboard !== undefined ?
+            String(ngModel.$viewValue.dashboard) :
             DEFAULT_DASHBOARD;
-          // console.log(scope.data.dashboard);
         };
 
         // Binding from view (general) to ngModel

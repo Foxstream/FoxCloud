@@ -64,21 +64,21 @@ export class DataNodeService {
   }
 
   /**
-   * Updates the user.
+   * Updates the data node.
    *
-   * @function updateUser
+   * @function updateDataNode
    * @memberOf FSCounterAggregatorApp.DataNodeService
-   * @param userId ID of the user to update.
+   * @param dataNodeId ID of the data node to update.
    * @param patch Document describing the updates to apply.
    */
-  updateUser(userId: UserId, patch: UpdateUserPatch): IPromise<User> {
-    const url: string = urlJoin(this.myConfig.apiUri, `users/${userId}`);
+  updateDataNode(dataNodeId: DataNodeId, patch: UpdateDataNodePatch): IPromise<DataNode> {
+    const url: string = urlJoin(this.myConfig.apiUri, `data_nodes/${dataNodeId}`);
     const data: any = {
       display_name: patch.displayName,
       app_data: patch.appData,
     };
     return this.$http.patch(url, data)
-      .then<User>((ret: IHttpResponse<UserJson>): User => userFromJson(ret.data));
+      .then<DataNode>((ret: IHttpResponse<DataNodeJson>): DataNode => dataNodeFromJson(ret.data));
   }
 
   /**
@@ -141,9 +141,9 @@ export interface CreateChildCompoundNodeOptions {
 }
 
 /**
- * Document describing the updates to apply to the user.
+ * Document describing the updates to apply to the data node.
  */
-export interface UpdateUserPatch {
+export interface UpdateDataNodePatch {
   displayName?: string;
   appData?: any;
 }

@@ -1,6 +1,7 @@
 /**
  * @namespace FSCounterAggregatorApp
  */
+
 (function () {
   // Main module declaration
   // require('angular');
@@ -34,7 +35,6 @@
   require('./components/settings/CurrentUser');
   require('./components/settings/SettingsSiteItems');
   require('./components/settings/SettingsSiteMembers');
-  require('./components/settings/SettingsSites');
   require('./components/settings/SettingsPerSite');
   require('./components/settings/SettingsUsersSites');
   require('./components/settings/SettingsPerUser');
@@ -42,6 +42,7 @@
   // Directives
   require('./components/dashboard/SideMenu');
   require('./components/topbar/TopBar');
+  require('./components/settings/form-controls/site-app-data');
   require('./components/settings/form-controls/user-app-data');
   require('./components/settings/MemberEditor');
   require('./components/settings/SiteEditor');
@@ -55,8 +56,10 @@
   require('./components/widgets/UserDashboard');
 
   // Components
-  require('./components/settings/settings-users');
   require('./components/settings/settings-sites');
+  require('./components/settings/settings-users');
+  require('./components/settings/sites/edit');
+  require('./components/settings/sites/new');
   require('./components/settings/users/edit');
   require('./components/settings/users/new');
 
@@ -143,6 +146,29 @@
         .state('settings_site_members.id', {
           url: ':siteId'
         })
+        .state('settings_sites', {
+          url: '/settings/sites',
+          template: '<fca-settings-sites></fca-settings-sites>',
+          pageName: "Sites management",
+          category: "Settings"
+        })
+        .state('settings_sites_new', {
+          url: '/settings/sites/new',
+          template: '<fca-settings-sites-new></fca-settings-sites-new>',
+          pageName: "New site",
+          category: "Settings"
+        })
+        .state('settings_sites_edit', {
+          url: '/settings/sites/:siteId/edit',
+          template: '<fca-settings-sites-edit site="$resolve.site"></fca-settings-sites-edit>',
+          resolve: {
+            site: ["$stateParams", "dataNodeService", function ($stateParams, dataNodeService) {
+              return dataNodeService.getDataNodeById($stateParams.siteId);
+            }],
+          },
+          pageName: "Edit site",
+          category: "Settings"
+        })
         .state('settings_users', {
           url: '/settings/users',
           template: '<fca-settings-users></fca-settings-users>',
@@ -164,12 +190,6 @@
             }],
           },
           pageName: "Edit user",
-          category: "Settings"
-        })
-        .state('settings_sites', {
-          url: '/settings/sites',
-          template: '<fca-settings-sites></fca-settings-sites>',
-          pageName: "Sites management",
           category: "Settings"
         })
         .state('settings_per_site', {

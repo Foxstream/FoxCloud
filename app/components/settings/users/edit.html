@@ -40,7 +40,8 @@
 
               <div class="form-group">
                 <label>User additional properties:</label>
-                <fca-settings-form-controls-json ng-model="$ctrl.appData"></fca-settings-form-controls-json>
+                <fca-settings-form-controls-user-app-data ng-model="$ctrl.appData">
+                </fca-settings-form-controls-user-app-data>
               </div>
 
               <button class='btn btn-primary' ng-disabled="!$ctrl.isDirty() || !userForm.$valid"
@@ -51,7 +52,7 @@
               <button ng-show="$ctrl.isDirty()"
                       class="btn btn-warning"
                       ng-really-click="$ctrl.handleCancel()"
-                      ng-really-message="Do you really want to cancel your changes ?">Cancel
+                      ng-really-message="Do you really want to cancel your changes?">Cancel
               </button>
             </form>
           </div>
