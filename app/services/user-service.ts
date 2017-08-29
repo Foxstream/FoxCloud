@@ -9,6 +9,12 @@ import { UserId } from "../types/scalars/user-id";
 declare const angular: IAngularStatic;
 
 /**
+ * Token used for Angular's dependency injection of the user service.
+ * This corresponds to the "Angular name" for this service.
+ */
+export const USER_SERVICE_TOKEN: string = "userService";
+
+/**
  * @class UserService
  * @memberOf FSCounterAggregatorApp
  * @description Manage users
@@ -29,7 +35,6 @@ export class UserService {
    * @memberOf FSCounterAggregatorApp.UserService
    */
   createUser(options: CreateUserOptions): IPromise<User> {
-    console.log("creating");
     const url: string = urlJoin(this.myConfig.apiUri, "users");
     const data: any = {
       email: options.email,
@@ -58,8 +63,6 @@ export class UserService {
     return this.$http.patch(url, data)
       .then<User>((ret: IHttpResponse<UserJson>): User => userFromJson(ret.data));
   }
-
-  deleteUser(userId: UserId): IPromise<void>;
 
   /**
    * Delete the user.
@@ -154,4 +157,4 @@ export interface SetPasswordOptions {
   password: string;
 }
 
-angular.module("FSCounterAggregatorApp").service("userService", ["$http", "myconfig", UserService]);
+angular.module("FSCounterAggregatorApp").service(USER_SERVICE_TOKEN, ["$http", "myconfig", UserService]);

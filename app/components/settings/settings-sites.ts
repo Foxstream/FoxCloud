@@ -1,21 +1,21 @@
 import { IAngularStatic } from "angular";
-import { USER_SERVICE_TOKEN, UserService } from "../../services/user-service";
-import { User } from "../../types/object/user";
 import { toResolvableArray } from "../../utils/resolvable";
+import { DATA_NODE_SERVICE_TOKEN, DataNodeService } from "../../services/data-node-service";
+import { CompoundNode } from "../../types/object/compound-node";
 
 declare const angular: IAngularStatic;
 
 /**
- * Token used for Angular's dependency injection of the settings/users component.
+ * Token used for Angular's dependency injection of the settings/sites component.
  * This corresponds to the "Angular name" for this component.
  */
-export const SETTINGS_USERS_TOKEN: string = "fcaSettingsUsers";
+export const SETTINGS_SITES_TOKEN: string = "fcaSettingsSites";
 
 /**
  * The state of the list item for a given user.
  */
 interface ListItem {
-  readonly user: User;
+  readonly site: CompoundNode;
   isSelected: boolean;
 }
 
@@ -25,10 +25,10 @@ interface ListItem {
  * @description Controller that manages users settings
  * require administrator rights
  */
-angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_TOKEN, {
-  templateUrl: "build/html/settings-users.html",
+angular.module("FSCounterAggregatorApp").component(SETTINGS_SITES_TOKEN, {
+  templateUrl: "build/html/settings-sites.html",
   controller: [
-    USER_SERVICE_TOKEN,
+    DATA_NODE_SERVICE_TOKEN,
     "DTOptionsBuilder",
     "DTColumnDefBuilder",
     class {
@@ -45,10 +45,10 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_TOKEN, {
       selectedCount: number;
 
       /**
-       * List of user with state data (selection state).
+       * List of sites with state data (selection state).
        * @readonly
        */
-      userList: ListItem[];
+      siteList: ListItem[];
 
       /**
        * Options for  `angular-datatables`.
@@ -60,11 +60,11 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_TOKEN, {
        */
       dtColumnDefs: any;
 
-      private userService: UserService;
+      private dataNodeService: DataNodeService;
 
       /* tslint:disable-next-line:variable-name */
-      constructor(userService: UserService, DTOptionsBuilder: any, DTColumnDefBuilder: any,) {
-        this.userService = userService;
+      constructor(dataNodeService: DataNodeService, DTOptionsBuilder: any, DTColumnDefBuilder: any) {
+        this.dataNodeService = dataNodeService;
 
         this.isAllSelected = false;
         this.selectedCount = 0;
@@ -82,11 +82,13 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_TOKEN, {
           DTColumnDefBuilder.newColumnDef(5).notSortable(),
         ];
 
-        this.userList = toResolvableArray(userService.getUsers()
-          .then((users: User[]): ListItem[] => {
+        console.log("Test");
+
+        this.siteList = toResolvableArray(dataNodeService.getViewableCompoundNodes()
+          .then((compoundNodes: CompoundNode[]): ListItem[] => {
             const result: ListItem[] = [];
-            for (const user of users) {
-              result.push({user, isSelected: false});
+            for (const compoundNode of compoundNodes) {
+              result.push({site: compoundNode, isSelected: false});
             }
             return result;
           }),
@@ -97,10 +99,10 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_TOKEN, {
        * Handles the user action of toggling the `isAllSelected` checkbox.
        */
       handleIsAllSelectedChange(): void {
-        for (const item of this.userList) {
+        for (const item of this.siteList) {
           item.isSelected = this.isAllSelected;
         }
-        this.selectedCount = this.isAllSelected ? this.userList.length : 0;
+        this.selectedCount = this.isAllSelected ? this.siteList.length : 0;
       }
 
       /**
@@ -108,12 +110,12 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_USERS_TOKEN, {
        */
       handleItemIsSelectedChange(): void {
         this.selectedCount = 0;
-        for (const item of this.userList) {
+        for (const item of this.siteList) {
           if (item.isSelected) {
             this.selectedCount++;
           }
         }
-        this.isAllSelected = this.selectedCount === this.userList.length;
+        this.isAllSelected = this.selectedCount === this.siteList.length;
       }
     },
   ],

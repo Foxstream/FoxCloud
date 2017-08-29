@@ -34,7 +34,6 @@
   require('./components/settings/CurrentUser');
   require('./components/settings/SettingsSiteItems');
   require('./components/settings/SettingsSiteMembers');
-  require('./components/settings/settings-users');
   require('./components/settings/SettingsSites');
   require('./components/settings/SettingsPerSite');
   require('./components/settings/SettingsUsersSites');
@@ -56,6 +55,8 @@
   require('./components/widgets/UserDashboard');
 
   // Components
+  require('./components/settings/settings-users');
+  require('./components/settings/settings-sites');
   require('./components/settings/users/edit');
   require('./components/settings/users/new');
 
@@ -144,8 +145,7 @@
         })
         .state('settings_users', {
           url: '/settings/users',
-          templateUrl: 'build/html/settings-users.view.html',
-          controller: 'SettingsUsers',
+          template: '<fca-settings-users></fca-settings-users>',
           pageName: "Users management",
           category: "Settings"
         })
@@ -167,10 +167,9 @@
           category: "Settings"
         })
         .state('settings_sites', {
-          url: '/settings_sites',
-          templateUrl: 'build/html/SettingsSitesView.html',
-          controller: 'SettingsSites',
-          pageName: "Sites - Users management",
+          url: '/settings/sites',
+          template: '<fca-settings-sites></fca-settings-sites>',
+          pageName: "Sites management",
           category: "Settings"
         })
         .state('settings_per_site', {

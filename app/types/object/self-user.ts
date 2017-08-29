@@ -1,9 +1,9 @@
-import {ActorType, actorTypeFromJson, actorTypeToJson} from "../enums/actor-type";
-import {DisplayName} from "../scalars/display-name";
-import {EmailAddress} from "../scalars/email-address";
-import {JsonValue} from "../scalars/json-value";
-import {UserId} from "../scalars/user-id";
-import {DataNode, dataNodeFromJson, DataNodeJson, dataNodeToJson} from "../unions/data-node";
+import { ActorType, actorTypeFromJson, actorTypeToJson } from "../enums/actor-type";
+import { DisplayName } from "../scalars/display-name";
+import { EmailAddress } from "../scalars/email-address";
+import { JsonValue } from "../scalars/json-value";
+import { UserId } from "../scalars/user-id";
+import { CompoundNode, compoundNodeFromJson, CompoundNodeJson, compoundNodeToJson } from "./compound-node";
 
 /**
  * Represents the currently authenticated user.
@@ -16,7 +16,7 @@ export interface SelfUser {
   isGlobalAdministrator: boolean;
   isEnabled: boolean;
   appData: JsonValue;
-  dataNodes: DataNode[];
+  viewableCompoundNodes: CompoundNode[];
 }
 
 /**
@@ -30,7 +30,7 @@ export interface SelfUserJson {
   is_enabled: boolean;
   display_name: DisplayName;
   app_data: JsonValue;
-  data_nodes: DataNodeJson[];
+  viewable_compound_nodes: CompoundNodeJson[];
 }
 
 export function selfUserFromJson(selfUserJson: SelfUserJson): SelfUser {
@@ -42,7 +42,7 @@ export function selfUserFromJson(selfUserJson: SelfUserJson): SelfUser {
     isGlobalAdministrator: selfUserJson.is_global_administrator,
     isEnabled: selfUserJson.is_enabled,
     appData: selfUserJson.app_data,
-    dataNodes: selfUserJson.data_nodes.map(dataNodeFromJson),
+    viewableCompoundNodes: selfUserJson.viewable_compound_nodes.map(compoundNodeFromJson),
   };
 }
 
@@ -55,6 +55,6 @@ export function selfUserToJson(selfUser: SelfUser): SelfUserJson {
     is_global_administrator: selfUser.isGlobalAdministrator,
     is_enabled: selfUser.isEnabled,
     app_data: selfUser.appData,
-    data_nodes: selfUser.dataNodes.map(dataNodeToJson),
+    viewable_compound_nodes: selfUser.viewableCompoundNodes.map(compoundNodeToJson),
   };
 }

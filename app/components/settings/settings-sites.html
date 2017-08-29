@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+  <section class="content">
+    <div class="row">
+      <section class="col-md-12">
+        <div class="box">
+          <div class="box-header with-border row">
+            <div class="col-md-7 col-xs-12">
+              <h3 class="box-title">
+                <i class="fa fa-book box-title"></i>
+                <span>Sites management</span>
+              </h3>
+            </div>
+            <div class="col-md-5 col-xs-12 text-right">
+              <a class="btn btn-primary" ui-sref="settings_sites_new()">
+                <i class="fa fa-plus"> New Site</i>
+              </a>
+              <button type="button"
+                      class="btn btn-warning"
+                      ng-disabled="$ctrl.selectedCount === 0"
+                      ng-really-click="$ctrl.deleteSelectedSites()"
+                      ng-really-message="Do you really want to delete <strong>{{$ctrl.selectedCount}}</strong> site(s)?">
+                <i class="fa fa-trash-o"> Delete</i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            <table datatable="ng"
+                   dt-options="dtOptions"
+                   dt-column-defs="dtColumnDefs"
+                   class="table table-bordered table-striped table-hover">
+              <thead>
+              <tr>
+                <th>
+                  <input type="checkbox" ng-model="$ctrl.isAllSelected"
+                         ng-change="$ctrl.handleIsAllSelectedChange()"/>Select all
+                </th>
+                <th>Site name</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr ng-repeat="siteItem in $ctrl.siteList">
+                <td><input type="checkbox" ng-model="siteItem.isSelected" ng-change="$ctrl.handleItemIsSelectedChange()"></td>
+                <td>{{siteItem.site.displayName}}</td>
+                <td>
+                  <a class="btn btn-default" ui-sref="settings_sites_edit({siteId: siteItem.site.id})">
+                    <i class="fa fa-edit"> Edit</i>
+                  </a>
+                  <button type="button"
+                          ng-really-click="$ctrl.deleteSite(siteItem.site)"
+                          ng-really-message="Do you really want to delete the user <strong>{{siteItem.site.displayName}}</strong> ?"
+                          item="siteItem.site"
+                          class="btn btn-warning">
+                    <i class="fa fa-trash-o"> Delete</i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div> <!-- end row -->
+  </section>
+</div>

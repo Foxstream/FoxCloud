@@ -1,6 +1,6 @@
-import {LegacyUser} from "./legacy-user";
-import {LegacyVisibleSite} from "./legacy-visible-site";
-import {SelfUser} from "../../types/object/self-user";
+import { SelfUser } from "../../types/object/self-user";
+import { LegacyUser } from "./legacy-user";
+import { LegacyVisibleSite } from "./legacy-visible-site";
 
 export interface LegacyUserSettings {
   user: LegacyUser;
@@ -17,13 +17,13 @@ export function legacyUserSettingsFromSelfUser(selfUser: SelfUser): LegacyUserSe
     userInfo: selfUser.appData,
   };
   const sites: LegacyVisibleSite[] = [];
-  for (const dataNode of selfUser.dataNodes) {
+  for (const compoundNode of selfUser.viewableCompoundNodes) {
     console.warn("Assuming `isadmin`");
     sites.push({
-      _id: dataNode.id,
+      _id: compoundNode.id,
       isadmin: true,
       items: [],
-      siteInfo: dataNode.appData,
+      siteInfo: compoundNode.appData,
     });
   }
   return {user: user, sites: sites};
