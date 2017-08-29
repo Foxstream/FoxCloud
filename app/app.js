@@ -25,7 +25,7 @@
   // Services
   require('./services/authentication-service');
   require('./services/legacy-user-service');
-  require('./services/site-service');
+  require('./services/legacy-site-service');
   require('./services/user-service');
 
   // Controllers

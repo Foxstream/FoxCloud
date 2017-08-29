@@ -11,7 +11,7 @@
     '$q',
     '$stateParams',
     'LegacyUserService',
-    'SiteService',
+    'LegacySiteService',
     'DTOptionsBuilder',
     'DTColumnDefBuilder',
     function (
@@ -20,7 +20,7 @@
       $q,
       $stateParams,
       LegacyUserService,
-      SiteService,
+      LegacySiteService,
       DTOptionsBuilder,
       DTColumnDefBuilder
     ) {
@@ -81,7 +81,7 @@
 
         // user settings contains only items id and name
         // retrieve all other information from the site settings
-        SiteService.getItems($scope.selectedElt._id, $scope.items)
+        LegacySiteService.getItems($scope.selectedElt._id, $scope.items)
           .then(function (itemsFull) {
             $scope.itemsFull = itemsFull;
           });
@@ -93,7 +93,7 @@
       };
 
       $scope.addItem = function () {
-        SiteService.addItem($scope.selectedElt._id)
+        LegacySiteService.addItem($scope.selectedElt._id)
           .then(function (ret) {
             $scope.selectElt(ret);
           });
@@ -101,14 +101,14 @@
 
       $scope.removeItem = function (item) {
         removeItemFromArray(item);
-        SiteService.removeItem($scope.selectedElt._id, item._id)
+        LegacySiteService.removeItem($scope.selectedElt._id, item._id)
           .then(function (ret) {
             $scope.selectElt(ret);
           });
       };
 
       $scope.unlinkItem = function (item) {
-        SiteService.unlinkItem($scope.selectedElt._id, item._id)
+        LegacySiteService.unlinkItem($scope.selectedElt._id, item._id)
           .then(function (ret) {
             $scope.selectElt(ret);
           });
@@ -126,7 +126,7 @@
         var promises = [];
         for (var key in $scope.selectedElts) {
           if ($scope.selectedElts[key].selected) {
-            promises.push(SiteService.removeItem($scope.selectedElt._id,
+            promises.push(LegacySiteService.removeItem($scope.selectedElt._id,
               $scope.selectedElts[key].item._id));
           }
         }

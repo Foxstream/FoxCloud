@@ -6,25 +6,25 @@
  */
 (function () {
 
-  require('../../services/site-service');
+  require('../../services/legacy-site-service');
 
   angular.module('FSCounterAggregatorApp').controller('SettingsPerSite', [
     '$scope',
     '$compile',
     '$stateParams',
-    'SiteService',
+    'LegacySiteService',
     'DTOptionsBuilder',
     'DTColumnDefBuilder',
     function (
       $scope,
       $compile,
       $stateParams,
-      SiteService,
+      LegacySiteService,
       DTOptionsBuilder,
       DTColumnDefBuilder
     ) {
 
-      var SiteResources = SiteService.getResource();
+      var SiteResources = LegacySiteService.getResource();
 
       // users connected to the current selected site
       $scope.users = [];

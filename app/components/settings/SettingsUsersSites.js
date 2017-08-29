@@ -9,7 +9,7 @@
     '$scope',
     '$compile',
     '$q',
-    'SiteService',
+    'LegacySiteService',
     'LegacyUserService',
     'DTOptionsBuilder',
     'DTColumnDefBuilder',
@@ -17,13 +17,13 @@
       $scope,
       $compile,
       $q,
-      SiteService,
+      LegacySiteService,
       LegacyUserService,
       DTOptionsBuilder,
       DTColumnDefBuilder
     ) {
 
-      var SiteResources = SiteService.getResource();
+      var SiteResources = LegacySiteService.getResource();
       var UserResources = LegacyUserService.getResource();
 
       $scope.selectAll = false;

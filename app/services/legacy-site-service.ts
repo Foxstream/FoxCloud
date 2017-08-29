@@ -9,7 +9,7 @@ import { DataNodeJson } from "../types/unions/data-node";
 
 declare const angular: IAngularStatic;
 
-export interface SiteService {
+export interface LegacySiteService {
   getSite(siteId: DataNodeId): IPromise<LegacySite>;
 
   getItem(siteId: DataNodeId, itemId: DataNodeId): IPromise<LegacyItem>;
@@ -50,18 +50,18 @@ function readCompoundNodeJsonAsLegacySite(compoundNode: CompoundNodeJson): Legac
 }
 
 /**
- * @class SiteService
+ * @class LegacySiteService
  * @memberOf FSCounterAggregatorApp
  * @description Manages sites settings
  */
 
-angular.module("FSCounterAggregatorApp").service("SiteService", [
+angular.module("FSCounterAggregatorApp").service("LegacySiteService", [
   "$http",
   "$resource",
   "$q",
   "myconfig",
   function (
-    this: SiteService,
+    this: LegacySiteService,
     $http: IHttpService,
     $resource: any,
     $q: IQService,

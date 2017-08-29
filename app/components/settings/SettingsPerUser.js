@@ -11,7 +11,7 @@
     '$stateParams',
     '$q',
     'LegacyUserService',
-    'SiteService',
+    'LegacySiteService',
     'DTOptionsBuilder',
     'DTColumnDefBuilder',
     function (
@@ -20,12 +20,12 @@
       $stateParams,
       $q,
       LegacyUserService,
-      SiteService,
+      LegacySiteService,
       DTOptionsBuilder,
       DTColumnDefBuilder
     ) {
 
-      var SiteResources = SiteService.getResource();
+      var SiteResources = LegacySiteService.getResource();
       var UserResources = LegacyUserService.getResource();
 
       $scope.selectAll = false;

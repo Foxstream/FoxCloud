@@ -14,7 +14,7 @@
     "$q",
     "DataService",
     "LegacyUserService",
-    "SiteService",
+    "LegacySiteService",
     "ComputeService",
     "OccupancyIndicator",
     "myconfig",
@@ -23,7 +23,7 @@
       $q,
       DataService,
       LegacyUserService,
-      SiteService,
+      LegacySiteService,
       ComputeService,
       OccupancyIndicator,
       myconfig
@@ -68,7 +68,7 @@
             return that;
           } else {
 
-            var SiteResources = SiteService.getResource();
+            var SiteResources = LegacySiteService.getResource();
             var promises = [];
 
             var funcAddSite = function (sites, site) {

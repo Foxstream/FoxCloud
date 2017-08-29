@@ -9,7 +9,7 @@
     '$stateParams',
     '$q',
     'LegacyUserService',
-    'SiteService',
+    'LegacySiteService',
     'DTOptionsBuilder',
     'DTColumnDefBuilder',
     function (
@@ -17,7 +17,7 @@
       $stateParams,
       $q,
       LegacyUserService,
-      SiteService,
+      LegacySiteService,
       DTOptionsBuilder,
       DTColumnDefBuilder
     ) {
@@ -87,7 +87,7 @@
           }
         }
 
-        SiteService.getSite($scope.selectedElt._id)
+        LegacySiteService.getSite($scope.selectedElt._id)
           .then(function (site) {
 
             var prefillMembers = [];
@@ -126,7 +126,7 @@
       $scope.saveMember = function () {
 
         function add_member(siteId, member) {
-          return SiteService.addUser(siteId,
+          return LegacySiteService.addUser(siteId,
             member.email,
             member.isAdmin)
             .then(function (ret) {
@@ -161,7 +161,7 @@
       };
 
       $scope.removeMember = function (member) {
-        return SiteService.removeUser($scope.selectedElt._id, member.email, member.isAdmin)
+        return LegacySiteService.removeUser($scope.selectedElt._id, member.email, member.isAdmin)
           .then(function (ret) {
             removeMemberFromArray(member);
             return member;
@@ -172,7 +172,7 @@
         var promises = [];
         for (var key in $scope.selectedElts) {
           if ($scope.selectedElts[key].selected) {
-            promises.push(SiteService.removeUser($scope.selectedElt._id,
+            promises.push(LegacySiteService.removeUser($scope.selectedElt._id,
               $scope.selectedElts[key].member.email,
               $scope.selectedElts[key].member.isAdmin));
           }
