@@ -1,4 +1,4 @@
-import { IAngularStatic, IHttpPromiseCallbackArg, IHttpService, IPromise, IQService } from "angular";
+import { IAngularStatic, IHttpResponse, IHttpService, IPromise, IQService } from "angular";
 import * as urlJoin from "url-join";
 import { Myconfig } from "../configuration/myconfig";
 import { Self, selfFromJson, SelfJson } from "../types/unions/self";
@@ -61,7 +61,7 @@ angular.module("FSCounterAggregatorApp").service("AuthenticationService", [
       }
       const url: string = urlJoin(myconfig.apiUri, "self");
       return $http.get(url)
-        .then<Self>((ret: IHttpPromiseCallbackArg<SelfJson>): Self => {
+        .then<Self>((ret: IHttpResponse<SelfJson>): Self => {
           _self = selfFromJson(ret.data);
           return _self!;
         });

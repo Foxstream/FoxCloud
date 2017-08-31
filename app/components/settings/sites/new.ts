@@ -4,6 +4,7 @@ import { DATA_NODE_SERVICE_TOKEN, DataNodeService } from "../../../services/data
 import { CompoundNode } from "../../../types/object/compound-node";
 import { DisplayName } from "../../../types/scalars/display-name";
 import { UserId } from "../../../types/scalars/user-id";
+import { EmailAddress } from "../../../types/scalars/email-address";
 
 declare const angular: IAngularStatic;
 
@@ -20,6 +21,7 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_SITES_NEW_TOKEN, {
     DATA_NODE_SERVICE_TOKEN,
     class {
       displayName: DisplayName;
+      ownerEmail: EmailAddress;
       ownerId: UserId | undefined;
 
       private $state: IStateService;
@@ -30,11 +32,12 @@ angular.module("FSCounterAggregatorApp").component(SETTINGS_SITES_NEW_TOKEN, {
         this.dataNodeService = dataNodeService;
 
         this.displayName = "";
+        this.ownerEmail = "";
       }
 
       handleSave(): void {
         if (this.ownerId === undefined) {
-          alert("Owner is not defined");
+          alert("Creation with owner email is not yet supported");
           return;
         }
 

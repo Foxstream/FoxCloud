@@ -12,6 +12,10 @@
                 <label>Display name:</label>
                 <input class="form-control" ng-model="$ctrl.displayName" type="text" name="display_name" required>
               </div>
+              <div class="form-group">
+                <label>First user email:</label>
+                <input class="form-control" ng-model="$ctrl.ownerEmail" type="text" name="owner_email" required>
+              </div>
               <button class='btn btn-primary' ng-disabled="!createSiteForm.$valid" ng-click="$ctrl.handleSave()">
                 Create site
               </button>
