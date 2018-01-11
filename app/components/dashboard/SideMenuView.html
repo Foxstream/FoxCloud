@@ -1,55 +1,55 @@
 <!-- Left side column. contains the logo and sidebar -->
 <aside class="main-sidebar">
-	<!-- sidebar: style can be found in sidebar.less -->
-	<section class="sidebar">
-		<div class="logo-xs"><img src="assets/img/foxstream_text_icon.png" class="image" alt="Foxstream icon"></div>
-		<!-- /.search form -->
-		<!-- sidebar menu: : style can be found in sidebar.less -->
-		<ul class="sidebar-menu">
-			<li class="header">MAIN NAVIGATION</li>
-			<li class="active treeview">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <div class="logo-xs"><img src="assets/img/foxstream_text_icon.png" class="image" alt="Foxstream icon"></div>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li class="active treeview">
 				<a><i class="fa fa-pie-chart"></i><span>Counters</span><i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
+                <ul class="treeview-menu">
 					<li ui-sref-active="active"><a ui-sref="dashboard"><i class="fa fa-circle-o"></i> Sites Overview</a></li>
 					<li ui-sref-active="active"><a ui-sref="generic"><i class="fa fa-circle-o"></i> Generic</a></li>
 					<li ui-sref-active="active" ng-show="hasUserDashboard"><a ui-sref="mydashboard"><i class="fa fa-circle-o"></i> MyDashboard</a></li>
-				</ul>
-			</li>
+                </ul>
+            </li>
 
-			<li class="treeview">
+            <li class="treeview">
 				<a><i class="fa fa-heartbeat"></i><span>Monitoring</span><i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
+                <ul class="treeview-menu">
 					<li ui-sref-active="active"><a ui-sref="monitoring"><i class="fa fa-circle-o"></i> Sites Overview</a></li>
-				</ul>
-			</li>
+                </ul>
+            </li>
 
-			<li class="treeview">
+            <li class="treeview">
 				<a><i class="fa fa-book"></i><span>Settings</span><i class="fa fa-angle-left pull-right"></i></a>
-				<ul class="treeview-menu">
+                <ul class="treeview-menu">
 					<li ui-sref-active="active"><a ui-sref="current_user"><i class="fa fa-circle-o"></i> Profile</a></li>
-					<li ng-show="user.admin">
+                    <li ng-show="user.admin">
 						<a href="#"><i class="fa fa-share"></i> Overall <i class="fa fa-angle-left pull-right"></i></a>
-						<ul class="treeview-menu">
+                        <ul class="treeview-menu">
 							<li ui-sref-active="active"><a ui-sref="settings_users"><i class="fa fa-circle-o"></i> Users management</a></li>
 							<li ui-sref-active="active"><a ui-sref="settings_sites"><i class="fa fa-circle-o"></i> Sites management</a></li>
 							<li ui-sref-active="active"><a ui-sref="settings_per_site"><i class="fa fa-circle-o"></i> Sites Associated Users</a></li>
-							<div ng-show="false">
+                            <div ng-show="false">
 								<li ui-sref-active="active"><a ui-sref="settings_users_sites"><i class="fa fa-circle-o"></i> Users - Sites management</a></li>
 								<li ui-sref-active="active"><a ui-sref="settings_per_user"><i class="fa fa-circle-o"></i> Per User management</a></li>
-							</div>
-						</ul>
-						<li>
-							<li ng-show="hasAdminSites">
-								<a href="#"><i class="fa fa-share"></i> My Sites <i class="fa fa-angle-left pull-right"></i>
+                            </div>
+                        </ul>
+                        <li>
+                            <li ng-show="hasAdminSites">
+                                <a href="#"><i class="fa fa-share"></i> My Sites <i class="fa fa-angle-left pull-right"></i>
 	    </a>
-								<ul class="treeview-menu">
+                                <ul class="treeview-menu">
 									<li ui-sref-active="active"><a ui-sref="settings_site_items"><i class="fa fa-circle-o"></i> Cameras</a></li>
 									<li ui-sref-active="active"><a ui-sref="settings_site_members"><i class="fa fa-circle-o"></i> Members</a></li>
-								</ul>
-							</li>
-				</ul>
-				</li>
-		</ul>
-	</section>
-	<!-- /.sidebar -->
+                                </ul>
+                            </li>
+                </ul>
+                </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
 </aside>

@@ -1,38 +1,38 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <nav class="navbar">
-      <div class="pull-left">
-        <h3><i class="fa fa-pie-chart"></i><span> Counters / Generic</span></h3>
-      </div>
-      <fca-calendar-picker params="params"></fca-calendar-picker>
-      <div class="pull-right">
-	<h3>
-	  <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}} <i class="fa fa-globe"></i></a>
-	</h3>
-      </div>
-    </nav>
-  </section>
-  <!-- Main content -->
-  <section class="content">
-    <!-- row -->
-    <div class="row">
-      <section class="col-md-12">
-	<div ng-controller="KPIPeriodGeneric as kpi">	  
-    <fca-graph-kpi params="params" kpi="kpi">
-    </fca-graph-kpi>
-	</div>
-      </section>
-      <section class="col-md-12">
-	<div ng-controller="KPISumGeneric as kpi">
-	  <fca-table-kpi params="params" kpi="kpi"
-			 kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
-	  </fca-table-kpi>
-	</div>
-      </section>
-    </div>
-    <!-- /.row -->
-  </section>
-  <!-- /.content -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <nav class="navbar">
+            <div class="pull-left">
+                <h3><i class="fa fa-pie-chart"></i><span> Counters / Generic</span></h3>
+            </div>
+            <fca-calendar-picker params="params"></fca-calendar-picker>
+            <div class="pull-right">
+                <h3>
+                    <a ng-click="exportCurrentData()" class="btn btn-default" type="text" title="Export data"><i class="fa fa-cloud-download"></i></a>
+                    <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}} <i class="fa fa-globe"></i></a>
+                </h3>
+            </div>
+        </nav>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- row -->
+        <div class="row">
+            <section class="col-md-12">
+                <div ng-controller="KPIPeriodGeneric as kpi">
+                    <fca-graph-kpi params="params" kpi="kpi">
+                    </fca-graph-kpi>
+                </div>
+            </section>
+            <section class="col-md-12">
+                <div ng-controller="KPISumGeneric as kpi">
+                    <fca-table-kpi params="params" kpi="kpi" kpi-options="{indicators: [{id:'in',name:'In'},{id:'out',name:'Out'},{id:'occ',name:'Max Occupancy',func:'KPIMax'}]}">
+                    </fca-table-kpi>
+                </div>
+            </section>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
 </div>

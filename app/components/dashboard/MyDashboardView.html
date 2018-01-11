@@ -1,24 +1,25 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
-  <section class="content-header">
-    <nav class="navbar">
-      <div class="pull-left">
-        <h3><i class="fa fa-pie-chart"></i><span> Counters / MyDashboard</span></h3>
-      </div>
-      <fca-calendar-picker params="params"></fca-calendar-picker>
-      <div class="pull-right">
-	<h3>
-	  <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}} <i class="fa fa-globe"></i></a>
-	</h3>
-      </div>
-    </nav>
-  </section>
-  <!-- Main content -->
-  <section class="content">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <nav class="navbar">
+            <div class="pull-left">
+                <h3><i class="fa fa-pie-chart"></i><span> Counters / MyDashboard</span></h3>
+            </div>
+            <fca-calendar-picker params="params"></fca-calendar-picker>
+            <div class="pull-right">
+                <h3>
+                    <a ng-click="exportCurrentData()" class="btn btn-default" type="text" title="Export data"><i class="fa fa-cloud-download"></i></a>
+                    <a ng-click="switchTimeZone()" class="btn btn-default" type="text">{{params.useTimeZone ? 'On Site Time': 'Local Time'}} <i class="fa fa-globe"></i></a>
+                </h3>
+            </div>
+        </nav>
+    </section>
+    <!-- Main content -->
+    <section class="content">
 
-      <fca-user-dashboard params="params"></fca-user-dashboard>
-      
-  </section>
-  <!-- /.content -->
+        <fca-user-dashboard params="params"></fca-user-dashboard>
+
+    </section>
+    <!-- /.content -->
 </div>
